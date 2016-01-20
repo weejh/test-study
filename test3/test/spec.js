@@ -1,6 +1,7 @@
 /* global describe, it */
 var assert = require('assert')
 var shuffleAndSplit = require('shuffle-and-split')
+var _ = require('lodash')
 
 describe('shuffle-and-split', function () {
   it('check for input, it is must an array', function () {
@@ -40,8 +41,20 @@ describe('shuffle-and-split', function () {
     assert(shuffleAndSplit([1, 2, 3], 3).length === 3)
   })
 
-  it('length of input array must be equal ', function () {
-    var result = shuffleAndSplit([1, 2, 3], 3)
-    assert(result.length === 3)
+  it('number of group ranging from zero to length of input array', function () {
+    var inputArray = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('')
+    var numberOfgroup = Math.round(Math.random() * inputArray.length + 1)
+    var result = shuffleAndSplit(inputArray, numberOfgroup)
+    assert(result.length !== inputArray.length)
+  })
+
+  it('check for randomness', function () {
+    var inputArray = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('')
+    var numberOfgroup = Math.round(Math.random() * 1000) + inputArray.length
+
+    var result1 = shuffleAndSplit(inputArray, numberOfgroup)
+    var result2 = shuffleAndSplit(inputArray, numberOfgroup)
+
+    assert(!_.isEqual(result1, result2))
   })
 })
