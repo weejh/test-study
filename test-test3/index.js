@@ -1,0 +1,1 @@
+var sNs = require ()
