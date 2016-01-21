@@ -1,7 +1,7 @@
 var fetch = require('isomorphic-fetch')
 
 function download (url) {
-  return fetch(url)
+  return global.fetch(url)
 }
 
 module.exports = download
